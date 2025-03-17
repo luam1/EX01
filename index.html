@@ -1,174 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações - Livraria</title>
+    <title>Ecos de Um Mundo Perdido</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
+    <script src="game.js" defer></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .settings-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-        .settings-title {
-            font-size: 1.5rem;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .setting-item {
-            margin-bottom: 10px;
-        }
-        .setting-item label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
-        }
-        .setting-item input[type="text"], 
-        .setting-item input[type="email"], 
-        .setting-item select {
-            width: calc(100% - 20px);
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .setting-item input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-        }
-        .setting-item input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-        .setting-item .option-btn {
-            display: inline-block;
-            background-color: #007bff;
-            color: #fff;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-        .setting-item .option-btn:last-child {
-            margin-right: 0;
+            overflow: hidden;
         }
     </style>
 </head>
-<body>
-    <div class="settings-container">
-        <div class="settings-title">Configurações da Livraria</div>
-        <form id="settings-form" onsubmit="return false;">
-            <div class="setting-item">
-                <label for="site-name">Nome do Site:</label>
-                <input type="text" id="site-name" name="site-name" value="Minha Livraria">
-            </div>
-            <div class="setting-item">
-                <label for="email">Email de Contato:</label>
-                <input type="email" id="email" name="email" value="guizzoluan@gmail.com">
-            </div>
-            <div class="setting-item">
-                <label for="theme">Tema:</label>
-                <select id="theme" name="theme">
-                    <option value="light">Claro</option>
-                    <option value="dark">Escuro</option>
-                </select>
-            </div>
-            <div class="setting-item">
-                <label for="font-size">Tamanho da Fonte:</label>
-                <select id="font-size" name="font-size" onchange="changeFontSize()">
-                    <option value="small">Pequeno</option>
-                    <option value="medium" selected>Médio</option>
-                    <option value="large">Grande</option>
-                </select>
-            </div>
-            <div class="setting-item">
-                <label>Notificações:</label>
-                <button type="button" class="option-btn">Ativar</button>
-                <button type="button" class="option-btn">Desativar</button>
-            </div>
-            <div class="setting-item">
-                <label>Notificações por Email:</label>
-                <input type="checkbox" id="email-notifications" name="email-notifications" checked>
-                <label for="email-notifications">Receber notificações por email</label>
-            </div>
-            <div class="setting-item">
-                <label>Brilho:</label>
-                <button type="button" class="option-btn">Baixo</button>
-                <button type="button" class="option-btn">Médio</button>
-                <button type="button" class="option-btn">Alto</button>
-            </div>
-            <div class="setting-item">
-                <label for="language">Idioma:</label>
-                <select id="language" name="language">
-                    <option value="en">English</option>
-                    <option value="pt" selected>Português</option>
-                    <option value="es">Español</option>
-                </select>
-            </div>
-            <div class="setting-item">
-                <label for="facebook">Link do Facebook:</label>
-                <input type="text" id="facebook" name="facebook" placeholder="https://www.facebook.com/sualivraria">
-            </div>
-            <div class="setting-item">
-                <label for="twitter">Link do Twitter:</label>
-                <input type="text" id="twitter" name="twitter" placeholder="https://x.com/GuizzoLuan?t=XNpaxIXuH8ZfteK_PE-eWQ&s=09">
-            </div>
-            <div class="setting-item">
-                <input type="submit" value="Salvar Configurações" onclick="saveSettings()">
-            </div>
-        </form>
-    </div>
-
-    <script>
-        function saveSettings() {
-            
-            var siteName = document.getElementById('site-name').value;
-            var email = document.getElementById('email').value;
-            var theme = document.getElementById('theme').value;
-            var fontSize = document.getElementById('font-size').value;
-            var emailNotifications = document.getElementById('email-notifications').checked ? 'Sim' : 'Não';
-            var language = document.getElementById('language').value;
-            var facebook = document.getElementById('facebook').value;
-            var twitter = document.getElementById('twitter').value;
-
-            alert(`Configurações salvas!\n\nNome do Site: ${siteName}\nEmail de Contato: ${email}\nTema: ${theme}\nTamanho da Fonte: ${fontSize}\nNotificações por Email: ${emailNotifications}\nIdioma: ${language}\nFacebook: ${facebook}\nTwitter: ${twitter}`);
+<script>
+    const config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 0 },
+            debug: false
         }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
 
-        function changeFontSize() {
-            var fontSize = document.getElementById('font-size').value;
-            var body = document.body;
+const game = new Phaser.Game(config);
 
-            switch (fontSize) {
-                case 'small':
-                    body.style.fontSize = '12px';
-                    break;
-                case 'medium':
-                    body.style.fontSize = '16px';
-                    break;
-                case 'large':
-                    body.style.fontSize = '20px';
-                    break;
-            }
-        }
+let player;
+let cursors;
 
-        changeFontSize();
-    </script>
+function preload() {
+    // Carregar imagens ou sprites
+    this.load.image('player', 'https://example.com/player.png'); // Substitua pelo URL da imagem do jogador
+    this.load.image('ground', 'https://example.com/ground.png'); // Substitua pelo URL da imagem do chão
+}
+
+function create() {
+    // Criar o chão
+    const ground = this.physics.add.staticGroup();
+    ground.create(400, 568, 'ground').setScale(2).refreshBody();
+
+    // Criar o jogador
+    player = this.physics.add.sprite(100, 450, 'player');
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
+
+    // Colisão entre o jogador e o chão
+    this.physics.add.collider(player, ground);
+
+    // Configurar controles
+    cursors = this.input.keyboard.createCursorKeys();
+}
+
+function update() {
+    // Movimentação do jogador
+    if (cursors.left.isDown) {
+        player.setVelocityX(-160);
+    } else if (cursors.right.isDown) {
+        player.setVelocityX(160);
+    } else {
+        player.setVelocityX(0);
+    }
+
+    if (cursors.up.isDown && player.body.touching.down) {
+        player.setVelocityY(-330);
+    }
+}
+</script>
 </body>
 </html>
