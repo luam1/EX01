@@ -1,78 +1,30 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecos de Um Mundo Perdido</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
-    <script src="game.js" defer></script>
+    <title>Document</title>
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
+        body{
+            background-image: url(https://www.einerd.com/wp-content/uploads/2025/01/solo-leveling-1-1-1-890x606.jpg);
+        }
+        container-brasil {
+            color: blue;
+        }
+
+        button{
+            color: black;
+            margin-bottom: 0%;
+            padding-left: 20px;
+            padding-right: 20px;
         }
     </style>
 </head>
-<script>
-    const config = {
-    type: Phaser.AUTO,
-    width: 10000,
-    height: 6000,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 0 },
-            debug: false
-        }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
+<body>
 
-const game = new Phaser.Game(config);
-
-let player;
-let cursors;
-
-function preload() {
-    // Carregar imagens ou sprites
-    this.load.image('player', 'https://example.com/player.png'); // Substitua pelo URL da imagem do jogador
-    this.load.image('ground', 'https://example.com/ground.png'); // Substitua pelo URL da imagem do chão
-}
-
-function create() {
-    // Criar o chão
-    const ground = this.physics.add.staticGroup();
-    ground.create(400, 568, 'ground').setScale(2).refreshBody();
-
-    // Criar o jogador
-    player = this.physics.add.sprite(100, 450, 'player');
-    player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
-
-    // Colisão entre o jogador e o chão
-    this.physics.add.collider(player, ground);
-
-    // Configurar controles
-    cursors = this.input.keyboard.createCursorKeys();
-}
-
-function update() {
-    // Movimentação do jogador
-    if (cursors.left.isDown) {
-        player.setVelocityX(-160);
-    } else if (cursors.right.isDown) {
-        player.setVelocityX(160);
-    } else {
-        player.setVelocityX(0);
-    }
-
-    if (cursors.up.isDown && player.body.touching.down) {
-        player.setVelocityY(-330);
-    }
-}
-</script>
+    <container-brasil>
+        <button>kjhgghvRHNKHFDSHRFRW</button>
+    </container-brasil>
+    
 </body>
 </html>
