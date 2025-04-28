@@ -32,9 +32,61 @@
 </head>
 <body>
 
-    <div class="container-centro">
-        <button>kjhgghvRHNKHFDSHRFRW</button>
-    </div>
-    
+    <div id="cronometro">00:00:00.0</div>
+    <button id="start">Iniciar</button>
+    <button id="stop">Parar</button>
+    <button id="reset">Resetar</button>
+
+<script>
+    let tempo = 0;
+    let cronometroAtivo = false;
+    let intervaloId;
+
+const display = document.getElementById('cronometro');
+const startButton = document.getElementById('start');
+const stopButton = document.getElementById('stop');
+const resetButton = document.getElementById('reset');
+
+startButton.addEventListener('click', () => {
+    if (!cronometroAtivo) {
+        cronometroAtivo = true;
+        intervaloId = setInterval(atualizarTempo, 10); // Atualizar a cada 10 milissegundos
+    }
+});
+
+stopButton.addEventListener('click', () => {
+    if (cronometroAtivo) {
+        cronometroAtivo = false;
+        clearInterval(intervaloId);
+    }
+});
+
+resetButton.addEventListener('click', () => {
+    tempo = 0;
+    cronometroAtivo = false;
+    clearInterval(intervaloId);
+    display.textContent = "00:00:00.0";
+});
+
+function atualizarTempo() {
+    tempo += 0.1; // Aumentar o tempo a cada 10 milissegundos
+    const horas = Math.floor(tempo / 3600);
+    const minutos = Math.floor((tempo % 3600) / 60);
+    const segundos = Math.floor(tempo % 60);
+    const decimas = Math.floor((tempo * 10) % 10); // Décimas de segundo
+
+    const formatoTempo = `${formataNumero(horas)}:${formataNumero(minutos)}:${formataNumero(segundos)}.${decimas}`;
+    display.textContent = formatoTempo;
+}
+
+function formataNumero(numero) {
+    return numero < 10 ? `0${numero}` : numero;
+}
+</script>    
 </body>
 </html>
+
+
+
+
+
