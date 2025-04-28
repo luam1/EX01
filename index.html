@@ -5,84 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body{
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
             background-image: url(https://www.einerd.com/wp-content/uploads/2025/01/solo-leveling-1-1-1-890x606.jpg);
             background-size: cover; 
             background-position: center; 
             height: 1200px; 
             width: 100%;
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
-        container-centro {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            max-width: 1150px;
-            margin: 15px;
+
+
+        h1 {
+            color: #333;
         }
 
-        button{
-            color: black;
-            
+        #cronometro {
+            font-size: 2em;
+            margin: 20px 0;
+            color: #333;
         }
+
+        button {
+            font-size: 1em;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #btnLigar[disabled] {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
     </style>
 </head>
 <body>
 
-    <div id="cronometro">00:00:00.0</div>
-    <button id="start">Iniciar</button>
-    <button id="stop">Parar</button>
-    <button id="reset">Resetar</button>
-
-<script>
-    let tempo = 0;
-    let cronometroAtivo = false;
-    let intervaloId;
-
-const display = document.getElementById('cronometro');
-const startButton = document.getElementById('start');
-const stopButton = document.getElementById('stop');
-const resetButton = document.getElementById('reset');
-
-startButton.addEventListener('click', () => {
-    if (!cronometroAtivo) {
-        cronometroAtivo = true;
-        intervaloId = setInterval(atualizarTempo, 10); // Atualizar a cada 10 milissegundos
-    }
-});
-
-stopButton.addEventListener('click', () => {
-    if (cronometroAtivo) {
-        cronometroAtivo = false;
-        clearInterval(intervaloId);
-    }
-});
-
-resetButton.addEventListener('click', () => {
-    tempo = 0;
-    cronometroAtivo = false;
-    clearInterval(intervaloId);
-    display.textContent = "00:00:00.0";
-});
-
-function atualizarTempo() {
-    tempo += 0.1; // Aumentar o tempo a cada 10 milissegundos
-    const horas = Math.floor(tempo / 3600);
-    const minutos = Math.floor((tempo % 3600) / 60);
-    const segundos = Math.floor(tempo % 60);
-    const decimas = Math.floor((tempo * 10) % 10); // Décimas de segundo
-
-    const formatoTempo = `${formataNumero(horas)}:${formataNumero(minutos)}:${formataNumero(segundos)}.${decimas}`;
-    display.textContent = formatoTempo;
-}
-
-function formataNumero(numero) {
-    return numero < 10 ? `0${numero}` : numero;
-}
-</script>    
+    <h1>Cronômetro</h1>
+    <p id="cronometro">00:00:00.0</p>
+    <button id="btnLigar">Ligar Cronômetro</button>
+    <button id="btnPausar">Pausar Cronômetro</button>
+    <button id="btnResetar">Resetar</button>
+    <script src="js.js"></script>
+ 
 </body>
 </html>
 
